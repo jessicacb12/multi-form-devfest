@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Member List</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+    <div id="popover" popover>
+        <p>Edit successful!</p>
+    </div>
+    <search id="memberList" class="container">
+        <div class="container__search">
+            <input type="text" id="searchInput" placeholder="Search members">
+        </div>
+        <button id="add-member">Add Member</button>
+    </search>
+
+    <dialog id="editModal">
+        <span class="close">&times;</span>
+        <h2>Edit Member</h2>
+        <form id="user-edit">
+            <input type="text" name="username" placeholder="Username">
+            <select name="active" form="user-edit">
+                <option value="true">Active</option>
+                <option value="false">Inactive</option>
+            </select>
+            <input type="submit" value="Save" />
+        </form>
+    </dialog>
+
+    <script src="script2.js"></script>
+</body>
+</html>

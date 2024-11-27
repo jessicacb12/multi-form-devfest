@@ -1,0 +1,106 @@
+:popover-open {
+    width: fit-content;
+    height: fit-content;
+    position: fixed;
+    top: 3%;
+    bottom: auto;
+}
+
+h2, #popover, .container {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 20px;
+}
+
+.chip-active {
+    background: crimson;
+    color: white;
+    padding: 2px;
+    border-radius: 4px;
+    margin-left: 8px;
+}
+
+.container__search {
+    padding: 1% 30% 0;
+}
+
+#add-member {
+    margin: 1em 0;
+    padding: 8px 0;
+    background: white;
+    border: 1px solid gray;
+    border-radius: 8px;
+    cursor: pointer;
+}
+#add-member:hover {
+    background: #f0f0f0;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#memberList ul {
+    list-style: none;
+    padding: 0;
+}
+
+#memberList li {
+    cursor: pointer;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    transition: background-color 0.3s ease-in-out;
+}
+
+#memberList li:hover {
+    background-color: #f0f0f0;
+}
+
+#editModal {
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+#editModal::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+#editModal form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+}
+input[name='username']:user-invalid, select:user-invalid {
+    border: 2px solid crimson;
+}
+input[name='username']:user-valid, select:user-valid {
+    border: 2px solid green;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    color: #aaa;
+}
+
+#popover {
+    border: none;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
