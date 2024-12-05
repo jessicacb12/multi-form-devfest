@@ -4,6 +4,7 @@ const formInfo = [
         form: [
             { label: 'First Name', name: 'first_name', type: 'text' },
             { label: 'Last Name', name: 'last_name', type: 'text' },
+            { label: 'KTP', name: 'ktp', type: 'text' },
         ]
     },
     {
@@ -41,13 +42,52 @@ const formInfo = [
         title: 'Review and Submit',
     },
 ]
-let data = {}
+var data = {}
+// For abort and debounce mechanism
+var timeout = undefined;
 
 function createLabelFor(name, label = '') {
     const labelElement = document.createElement('label');
     labelElement.innerHTML = label || name;
     labelElement.setAttribute('for', name);
     return labelElement;
+}
+
+async function isKTPValid(id) {
+    // With asynchronous
+    // return new Promise(resolve => setTimeout(() => {
+    //     console.log('RESOLVING', id, id === '1234567891011121');
+    //     resolve(id === '1234567891011121');
+    // }, 1000));
+
+    // with synchronous calculation here
+    // Array(10000000).fill('tes').map(
+    //     (item, index) => `${item} ${index} just do useless thing here`
+    // );
+
+    // Debounce mechanism
+    // return new Promise(resolve => {
+    //     setTimeout(() => {
+    //         console.log('RESOLVING');
+    //         Array(10000000).fill('tes').map(
+    //             (item, index) => `${item} ${index} just do useless thing here`
+    //         );
+    //         resolve(id === '1234567891011121');
+    //     }, 3000);
+    // });
+
+    // Debounce with abort mechanism
+    return new Promise(resolve => {
+        if (timeout) clearTimeout(timeout);
+
+        timeout = setTimeout(() => {
+            console.log('RESOLVING');
+            Array(10000000).fill('tes').map(
+                (item, index) => `${item} ${index} just do useless thing here`
+            );
+            resolve(id === '1234567891011121');
+        }, 1000);
+    });
 }
 
 function createFormItem(form) {
@@ -74,10 +114,25 @@ function createFormItem(form) {
 
             default:
                 const fieldElement = document.createElement('input');
+                const spanInvalid = document.createElement('span');
+                spanInvalid.classList.add('invalid');
                 fieldElement.setAttribute('type', type);
                 fieldElement.setAttribute('name', name);
                 if (data[name] !== undefined) fieldElement.setAttribute('value', data[name]);
+                if (name === 'ktp') {
+                    fieldElement.addEventListener('input', event => {
+                        if (event.target.value) {
+                            isKTPValid(event.target.value)
+                                .then(
+                                    isValid => {
+                                        spanInvalid.innerHTML = isValid ? '' : 'KTP ID is wrong!'
+                                    }
+                                )
+                        }
+                    })
+                }
                 formElement.appendChild(fieldElement)
+                formElement.appendChild(spanInvalid);
                 break;
         }
         form.appendChild(formElement);
