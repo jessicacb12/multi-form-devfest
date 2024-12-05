@@ -42,6 +42,10 @@ nav li.active {
     /*animation: fadeIn 0.5s ease-in-out;*/
 }
 
+.invalid {
+    color: crimson;
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;
